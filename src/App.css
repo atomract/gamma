@@ -1,0 +1,103 @@
+.App {
+ /* height: 100vh; */
+ background: #9e9e9e;
+}
+
+.CanvaStyle {
+ height: 100vh;
+ background-color: black;
+}
+
+nav {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.navbar-brand img {
+  height: 15rem;
+  margin-left: -2rem;
+  margin-top: -5rem;
+}
+
+.navbar-menu {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-menu li {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+.navbar-menu a {
+  display: block;
+  padding: 0.5rem;
+  text-decoration: none;
+  color: #333;
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-menu {
+    flex-direction: row;
+    margin: 0;
+  }
+
+  .navbar-menu li {
+    margin-left: 1rem;
+    margin-bottom: 0;
+  }
+}
+
+
+.TrianglePlayer {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  overflow: hidden;
+  display: flex;  
+
+}
+
+/*  */
+
+.videoPlayer {
+  display: flex;
+  flex: auto;
+  align-content: center;
+  justify-content: center;
+}
+
+.TrianglePlayer video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform-origin: bottom center;
+  transform: rotate(45deg) scaleY(1.41);
+}
+
+
+/* @media only screen and (max-width: 500px) {
+  .TrianglePlayer:before {
+    border-left: 100vw solid transparent;
+    border-bottom: 100vw solid white;
+    border-right: 100vw solid transparent;
+  }
+} */
