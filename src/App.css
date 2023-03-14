@@ -1,18 +1,17 @@
 .App {
- /* height: 100vh; */
- background: #9e9e9e;
+  /* height: 100vh; */
+  background: #9e9e9e;
 }
 
 .CanvaStyle {
- height: 100vh;
- background-color: black;
+  height: 100vh;
+  background-color: black;
 }
 
 nav {
   display: flex;
   flex-direction: column;
 }
-
 
 .navbar-brand {
   display: flex;
@@ -63,14 +62,14 @@ nav {
   }
 }
 
-
 .TrianglePlayer {
   position: relative;
   width: 600px;
   height: 600px;
   overflow: hidden;
-  display: flex;  
-
+  display: flex;
+  /* Triangle Cutting */
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
 }
 
 /*  */
@@ -80,6 +79,7 @@ nav {
   flex: auto;
   align-content: center;
   justify-content: center;
+  margin-bottom: 5%;
 }
 
 .TrianglePlayer video {
@@ -92,7 +92,6 @@ nav {
   transform-origin: bottom center;
   transform: rotate(45deg) scaleY(1.41);
 }
-
 
 /* @media only screen and (max-width: 500px) {
   .TrianglePlayer:before {
