@@ -2,30 +2,25 @@ import ReactPlayer from "react-player";
 import "./App.css";
 import Navbar from "./components/navbar";
 import SpaceScene from "./components/space";
-import TrianglePlayer from "./components/trianglePlayer";
-
-function PlayerTriangle() {
-  return (
-    <div className="player-triangle">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  );
-}
-
+import Main from "./components/Main";
+import Test from "./components/Test";
 function App() {
-  const videoSrc = "https://www.youtube.com/watch?v=2kTQZVzkXgI";
-
   return (
-    <div className="App">
-      <Navbar />
+    <div className="">
+      <Main />
+      {/* <Test /> */}
+      {/* <Navbar /> */}
       {/* <TrianglePlayer videoSrc={videoSrc} /> */}
-      <div className="videoPlayer">
-        <ReactPlayer className="TrianglePlayer " url={videoSrc} />
+      {/* <div className="videoPlayer">
+        <ReactPlayer
+          className="TrianglePlayer"
+          height={582}
+          width={850}
+          url={videoSrc}
+        />
         {/* <PlayerTriangle /> */}
-      </div>
-      <SpaceScene />
+      {/* </div> */}
+      {/* // <SpaceScene /> */}
     </div>
   );
 }

@@ -18,7 +18,7 @@ import EarthNormalMap from "../assets/textures/8k_earth_normal_map.jpg";
 import EarthSpecularMap from "../assets/textures/8k_earth_specular_map.jpg";
 import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
 
-const Earth = (props) => {
+const Earth = () => {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
     TextureLoader,
     [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
@@ -26,9 +26,9 @@ const Earth = (props) => {
 
   return (
     <>
-      <ambientLight intensity={0.5} />
+      <ambientLight intensity={0} />
       <mesh>
-        <sphereGeometry args={[1.005, 100, 100]} />
+        <sphereGeometry args={[1, 100, 100]} />
         <meshPhongMaterial
           map={colorMap}
           opacity={0.4}
@@ -45,17 +45,18 @@ const Earth = (props) => {
           side={THREE.DoubleSide}
         />
         <OrbitControls
-          enablePan={true}
-          zoomSpeed={0.6}
-          autoRotate={true}
-          panSpeed={0.5}
-          rotateSpeed={0.4}
-          maxDistance={16050}
-          minDistance={1}
-          minZoom={200}
-          maxZoom={100}
-          enabled={true}
-          enableZoom={true}
+          enablePan={false}
+          // zoomSpeed={0.75}
+          autoRotate={false}
+          // panSpeed={0.5}
+          // rotateSpeed={0.4}
+          // maxDistance={16050}
+          // minDistance={1}
+          // minZoom={200}
+          // maxZoom={100}
+          // enabled={true}
+          enableZoom={false}
+          enableRotate={false}
         />
       </mesh>
     </>
