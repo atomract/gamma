@@ -28,7 +28,7 @@ const Earth = () => {
     <>
       <ambientLight intensity={0} />
       <mesh>
-        <sphereGeometry args={[1, 100, 100]} />
+        <sphereGeometry args={[3, 100, 100]} />
         <meshPhongMaterial
           map={colorMap}
           opacity={0.4}
@@ -37,7 +37,7 @@ const Earth = () => {
         />
       </mesh>
       <mesh>
-        <sphereGeometry args={[1, 100, 100]} />
+        <sphereGeometry args={[3, 100, 100]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial
           map={colorMap}
