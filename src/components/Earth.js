@@ -20,7 +20,7 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 import EarthTexture from "../assets/textures/8k_earth_daymap.jpg";
 
-const Earth = ({ size }) => {
+const Earth = ({ size, pos }) => {
   const [EarthTextureMap] = useLoader(TextureLoader, [EarthTexture]);
 
   return (
@@ -35,7 +35,7 @@ const Earth = ({ size }) => {
           transparent={true}
         />
       </mesh> */}
-      <mesh position={[0, 0, 0]}>
+      <mesh position={pos}>
         <sphereGeometry args={[size, 100, 100]} />
         <meshPhongMaterial specularMap={EarthTextureMap} />
         <meshStandardMaterial

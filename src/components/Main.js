@@ -66,7 +66,7 @@ const Main = () => {
           autoPlay
           muted
           loop
-          style={{ objectFit: "cover", width: "100%", height: "100%" }}
+          style={{ objectFit: "cover", width: "100%", height: "65%" }}
         />
       </div>
       <div className="logoParent">
@@ -77,10 +77,6 @@ const Main = () => {
         <h1 className="subText">MetaVerse</h1>
       </div>
       <div className="CanvaStyle">
-        <Canvas>
-          <directionalLight position={[2, 1, 20]} intensity={1.5} />
-          <Earth size={2.6} />
-        </Canvas>
         <div className="SkyBox">
           <Canvas>
             <mesh position={[0, 0, 0]}>
@@ -97,7 +93,7 @@ const Main = () => {
                 {/* <meshStandardMaterial map={ImageTexture} side={DoubleSide} /> */}
               </mesh>
             </mesh>
-            <Earth size={1} />
+            <Earth pos= {[0,0.9,0]} size={2.3} />
             <mesh position={[2, -0.5, -0.5]}>
               <Html as="div" className="">
                 <div>
