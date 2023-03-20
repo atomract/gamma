@@ -5,6 +5,7 @@ import { Html, OrbitControls, RenderTexture, Text } from "@react-three/drei";
 import {
   DoubleSide,
   PerspectiveCamera,
+  RepeatWrapping,
   SphereGeometry,
   TextureLoader,
 } from "three";
@@ -17,58 +18,45 @@ import BGVideo from "../assets/video.mp4";
 
 const Main = () => {
   const [ImageTexture] = useLoader(TextureLoader, [image]);
+  ImageTexture.wrapS = RepeatWrapping;
+  ImageTexture.wrapT = RepeatWrapping;
 
   let width = window.innerWidth;
   let height = window.innerHeight;
   const videoRef = useRef();
   return (
-    // <div className="container">
-    //   {/* <HomePageText /> */}
-    //   <Canvas>
-    // {/* PerspectiveCamera( 45, width / height, 1, 1000 ); */}
-    /* <OrbitControls
-          enableZoom={false}
-          enablePan={false}
-          enableRotate={false}
-        />
-        <ambientLight intensity={1} /> */
-    /* <directionalLight position={[1, 1, 20]} intensity={1.5} /> */
-    /* <mesh>
-          <sphereGeometry args={[50, 320, 320]} />
-          <meshStandardMaterial side={DoubleSide} map={ImageTexture} />
-          <perspectiveCamera
-            fov={20}
-            makeDefault={true}
-            position={[45, width / height, 1, 1000]}
-          />
-        </mesh> */
-    /* 
-        <mesh>
-          <Html as="div" className="">
-            <div className="d-flex" style={{ display: "flex" }}>
-              <div>
-                <ReactPlayer
-                  controls={true}
-                  style={{
-                    position: "absolute",
-                    height: "100vh",
-                    width: "100vh",
-                    top: "0",
-                    left: "0",
-                    transform: "none",
-                  }}
-                  url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-                />
-              </div>
-              <div>
-                <h1>Hello World</h1>
-              </div>
-            </div>
-          </Html>
-        </mesh>
-        {/* <Earth /> */
-    //   </Canvas>
-    // </div> */}
+    // // <div className="container">
+    // //   {/* <HomePageText /> */}
+    // //   <Canvas>
+    // // {/* PerspectiveCamera( 45, width / height, 1, 1000 ); **-}
+
+    // /*
+    //     <mesh>
+    //       <Html as="div" className="">
+    //         <div className="d-flex" style={{ display: "flex" }}>
+    //           <div>
+    //             <ReactPlayer
+    //               controls={true}
+    //               style={{
+    //                 position: "absolute",
+    //                 height: "100vh",
+    //                 width: "100vh",
+    //                 top: "0",
+    //                 left: "0",
+    //                 transform: "none",
+    //               }}
+    //               url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+    //             />
+    //           </div>
+    //           <div>
+    //             <h1>Hello World</h1>
+    //           </div>
+    //         </div>
+    //       </Html>
+    //     </mesh>
+    //     {/* <Earth /> */
+    // //   </Canvas>
+    // // </div> */}
 
     <>
       <div style={{ position: "fixed", top: 0, left: 0, zIndex: -1 }}>
@@ -90,9 +78,72 @@ const Main = () => {
       </div>
       <div className="CanvaStyle">
         <Canvas>
-          <directionalLight position={[5, 1, 20]} intensity={1.5} />
-          <Earth />
+          <directionalLight position={[2, 1, 20]} intensity={1.5} />
+          <Earth size={2.6} />
         </Canvas>
+        <div className="SkyBox">
+          <Canvas>
+            <mesh position={[0, 0, 0]}>
+              <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                enableRotate={false}
+              />
+              <ambientLight intensity={0} />
+              <directionalLight position={[1, 2, 30]} intensity={1} />
+              <mesh position={[0, -2, 0]}>
+                <sphereGeometry args={[40, 600, 600]} />
+                <meshStandardMaterial side={DoubleSide} map={ImageTexture} />
+                {/* <meshStandardMaterial map={ImageTexture} side={DoubleSide} /> */}
+              </mesh>
+            </mesh>
+            <Earth size={1} />
+            <mesh position={[2, -0.5, -0.5]}>
+              <Html as="div" className="">
+                <div>
+                  <p
+                    style={{
+                      paddingRight: "40px",
+                      paddingLeft: "20px",
+                      paddingTop: "10px",
+                      paddingBottom: "10px",
+                      backgroundColor: "GrayText",
+                      width: "300px",
+                      color: "white",
+                    }}
+                  >
+                    A safe, high quality and easy-to-explore virtual world twin
+                    where Liveness, commnication, entertainment and investment
+                    are available to everyone
+                  </p>
+                </div>
+              </Html>
+            </mesh>
+            <mesh position={[4, -3, -3]}>
+              <Html as="div" className="">
+                <div
+                  className=""
+                  style={{ display: "flex", justifyContent: "flex-end" }}
+                >
+                  <div>
+                    <h1
+                      style={{
+                        paddingRight: "20px",
+                        paddingLeft: "20px",
+                        paddingTop: "10px",
+                        paddingBottom: "10px",
+                        backgroundColor: "GrayText",
+                        color: "white",
+                      }}
+                    >
+                      explore
+                    </h1>
+                  </div>
+                </div>
+              </Html>
+            </mesh>
+          </Canvas>
+        </div>
       </div>
     </>
   );
