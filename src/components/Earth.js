@@ -13,21 +13,20 @@ import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 // Images
-import EarthDayMap from "../assets/textures/8k_earth_daymap.jpg";
-import EarthNormalMap from "../assets/textures/8k_earth_normal_map.jpg";
-import EarthSpecularMap from "../assets/textures/8k_earth_specular_map.jpg";
-import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
+// import EarthDayMap from "../assets/textures/8k_earth_daymap.jpg";
+// import EarthNormalMap from "../assets/textures/8k_earth_normal_map.jpg";
+// import EarthSpecularMap from "../assets/textures/8k_earth_specular_map.jpg";
+// import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
 
-const Earth = () => {
-  const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
-    TextureLoader,
-    [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
-  );
+import EarthTexture from "../assets/textures/8k_earth_daymap.jpg";
+
+const Earth = ({ size }) => {
+  const [EarthTextureMap] = useLoader(TextureLoader, [EarthTexture]);
 
   return (
     <>
-      <ambientLight intensity={0} />
-      <mesh>
+      <ambientLight intensity={1} />
+      {/* <mesh>
         <sphereGeometry args={[3, 100, 100]} />
         <meshPhongMaterial
           map={colorMap}
@@ -35,13 +34,13 @@ const Earth = () => {
           depthWrite={true}
           transparent={true}
         />
-      </mesh>
-      <mesh>
-        <sphereGeometry args={[3, 100, 100]} />
-        <meshPhongMaterial specularMap={specularMap} />
+      </mesh> */}
+      <mesh position={[0, 0, 0]}>
+        <sphereGeometry args={[size, 100, 100]} />
+        <meshPhongMaterial specularMap={EarthTextureMap} />
         <meshStandardMaterial
-          map={colorMap}
-          normalMap={normalMap}
+          map={EarthTextureMap}
+          normalMap={EarthTextureMap}
           side={THREE.DoubleSide}
         />
         <OrbitControls

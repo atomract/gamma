@@ -18,12 +18,12 @@ body,
 
 .CanvaStyle {
   margin-top: -4%;
-  height: 100vh;
+  height: 200vh;
   /* background-color: black; */
 }
 .container {
   width: 100%;
-  height: 100vh;
+  height: 100%;
 }
 
 .VideoPlayerDiv {
@@ -32,11 +32,15 @@ body,
 }
 
 .VideoPlayer {
-  height: 100vh;
+  height: 100%;
   background-color: black;
 }
 #myVideo {
   /* video fullscreen and fixed like background */
+}
+.SkyBox {
+  margin-top: -10%;
+  height: 100vh;
 }
 
 /* nav {
