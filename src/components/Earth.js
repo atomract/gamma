@@ -25,7 +25,7 @@ const Earth = ({ size, pos }) => {
 
   return (
     <>
-      <ambientLight intensity={1} />
+      <ambientLight intensity={0.6} />
       {/* <mesh>
         <sphereGeometry args={[3, 100, 100]} />
         <meshPhongMaterial
@@ -36,7 +36,7 @@ const Earth = ({ size, pos }) => {
         />
       </mesh> */}
       <mesh position={pos}>
-        <sphereGeometry args={[size, 100, 100]} />
+        <sphereGeometry args={[size, 50, 50]} />
         <meshPhongMaterial specularMap={EarthTextureMap} />
         <meshStandardMaterial
           map={EarthTextureMap}

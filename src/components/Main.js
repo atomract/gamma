@@ -81,14 +81,14 @@ const Main = () => {
           <Canvas>
             <mesh position={[0, 0, 0]}>
               <OrbitControls
-                enableZoom={false}
-                enablePan={false}
-                enableRotate={false}
+                enableZoom={true}
+                enablePan={true}
+                enableRotate={true}
               />
               <ambientLight intensity={0} />
               <directionalLight position={[1, 2, 30]} intensity={1} />
               <mesh position={[0, -2, 0]}>
-                <sphereGeometry args={[40, 600, 600]} />
+                <sphereGeometry args={[7, 105, 105]} />
                 <meshStandardMaterial side={DoubleSide} map={ImageTexture} />
                 {/* <meshStandardMaterial map={ImageTexture} side={DoubleSide} /> */}
               </mesh>
