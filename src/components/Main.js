@@ -81,9 +81,9 @@ const Main = () => {
           <Canvas>
             <mesh position={[0, 0, 0]}>
               <OrbitControls
-                enableZoom={true}
-                enablePan={true}
-                enableRotate={true}
+                enableZoom={false}
+                enablePan={false}
+                enableRotate={false}
               />
               <ambientLight intensity={0} />
               <directionalLight position={[1, 2, 30]} intensity={1} />
