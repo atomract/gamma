@@ -11,21 +11,6 @@ body,
   padding: 0;
 }
 
-.App {
-  /* height: 100vh; */
-  background: #9e9e9e;
-}
-
-.CanvaStyle {
-  margin-top: -4%;
-  height: 100vh;
-  /* background-color: black; */
-}
-.container {
-  width: 100%;
-  height: 100%;
-}
-
 .VideoPlayerDiv {
   position: absolute;
   transform: none;
@@ -38,69 +23,9 @@ body,
 #myVideo {
   /* video fullscreen and fixed like background */
 }
-.SkyBox {
-  margin-top: -10%;
-  height: 100vh;
-}
 
-/* nav {
-  display: flex;
-  flex-direction: column;
-} */
-.logo {
-}
 .logoParent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-
-.Maintext {
-  text-align: center;
-  font-size: 8rem;
-  font-weight: 900;
-  color: white;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-}
-.subText {
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 500;
-  color: white;
-  margin-block-start: 0em;
-}
-
-/* .navbar-brand {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.navbar-brand img {
-  height: 15rem;
-  margin-left: -2rem;
-  margin-top: -5rem;
-}
-
-.navbar-menu {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-}
-
-.navbar-menu li {
-  list-style: none;
-  margin-bottom: 1rem;
-}
-
-.navbar-menu a {
-  display: block;
-  padding: 0.5rem;
-  text-decoration: none;
-  color: #333;
-} */
 
 @media screen and (min-width: 768px) {
   nav {

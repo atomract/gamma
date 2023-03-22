@@ -8,19 +8,6 @@ function App() {
   return (
     <div className="">
       <Main />
-      {/* <Test /> */}
-      {/* <Navbar /> */}
-      {/* <TrianglePlayer videoSrc={videoSrc} /> */}
-      {/* <div className="videoPlayer">
-        <ReactPlayer
-          className="TrianglePlayer"
-          height={582}
-          width={850}
-          url={videoSrc}
-        />
-        {/* <PlayerTriangle /> */}
-      {/* </div> */}
-      {/* // <SpaceScene /> */}
     </div>
   );
 }
