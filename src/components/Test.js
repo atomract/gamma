@@ -1,5 +1,4 @@
 import React from "react";
-import "./styles.css";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Html, OrbitControls, RenderTexture, Text } from "@react-three/drei";
 import {
