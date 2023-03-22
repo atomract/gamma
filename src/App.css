@@ -11,20 +11,6 @@ body,
   padding: 0;
 }
 
-.App {
-  /* height: 100vh; */
-  background: #9e9e9e;
-}
-
-.CanvaStyle {
-  height: 100vh;
-  /* background-color: black; */
-}
-.container {
-  width: 100%;
-  height: 100%;
-}
-
 .VideoPlayerDiv {
   position: absolute;
   transform: none;
@@ -37,33 +23,8 @@ body,
 #myVideo {
   /* video fullscreen and fixed like background */
 }
-.SkyBox {
-  margin-top: 2%;
-  height: 100vh;
-}
 
 .logoParent {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-}
-
-.Maintext {
-  text-align: center;
-  font-size: 8rem;
-  font-weight: 900;
-  color: white;
-  margin-block-start: 0em;
-  margin-block-end: 0em;
-  margin-top: -50px;
-}
-.subText {
-  text-align: center;
-  font-size: 4rem;
-  font-weight: 500;
-  color: white;
-  margin-block-start: 0em;
 }
 
 @media screen and (min-width: 768px) {

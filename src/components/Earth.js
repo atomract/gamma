@@ -1,6 +1,6 @@
 import { Canvas, useLoader } from "@react-three/fiber";
 import "../App.css";
-import { OrbitControls, useTexture } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import {
   Texture,
   MeshBasicMaterial,
@@ -11,22 +11,21 @@ import {
 
 import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
-
+import classNames from "classnames";
 import EarthTexture from "../assets/textures/8k_earth_daymap.jpg";
-
-useTexture.preload(EarthTexture);
 
 const Earth = ({ size, pos }) => {
   const [EarthTextureMap] = useLoader(TextureLoader, [EarthTexture]);
-
+  const materialClasses = classNames("bg-red-500", "hover:bg-blue-500");
   return (
-    <mesh>
+    <mesh className="">
       <ambientLight intensity={0.6} />
 
-      <mesh position={pos}>
-        <sphereGeometry args={[size, 50, 50]} />
+      <mesh rotation={[1, 2, 1]} position={pos}>
+        <sphereGeometry args={[size, 50, 40]} />
         <meshPhongMaterial specularMap={EarthTextureMap} />
         <meshStandardMaterial
+          className={materialClasses}
           map={EarthTextureMap}
           normalMap={EarthTextureMap}
           side={THREE.DoubleSide}

@@ -22,20 +22,33 @@ const Main = () => {
           style={{ objectFit: "cover", width: "100%", height: "65%" }}
         />
       </div>
-      <div className="logoParent">
+      {/* display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px; */}
+      <div className="flex items-center justify-center h-16 my-8 md:my-16">
         <img src={Logo} className="logo" width={500} height={350} alt="logo" />
       </div>
       <div style={{}}>
-        <h1 className="Maintext"> ULTIMATE LIFE </h1>
-        <h1 className="subText">MetaVerse</h1>
+        {/* Hero Main Text */}
+        <h1 className=" text-center text-5xl md:text-9xl font-black text-white ">
+          {" "}
+          ULTIMATE LIFE{" "}
+        </h1>
+
+        {/* Hero SubText */}
+        <h2 className="text-center font-medium text-white  text-4xl ">
+          MetaVerse
+        </h2>
       </div>
-      <div className="CanvaStyle">
-        <div className="SkyBox">
-          <Canvas camera={{}}>
+      {/* Stating Canvas */}
+      <div className="h-screen">
+        <div className="h-screen md:mt-5 w-full">
+          <Canvas className="">
             <Skybox />
             <mesh>
-              <Earth pos={[0, 0.9, 0]} size={2.3} />
-              <Moon pos={[5, 0.9, 0]} size={0.6} />
+              <Earth pos={[0, 0.9, 0]} size={2.3} url={[]} />
+              <Moon pos={[4, 0.9, 0]} size={0.5} />
             </mesh>
             <mesh position={[2, -1, -0.5]}>
               <Html as="div" className="">
@@ -60,7 +73,7 @@ const Main = () => {
                 </div>
               </Html>
             </mesh>
-            <mesh position={[7.34, -3.4, -3.4]}>
+            <mesh position={[9.15, -4, -4]}>
               <Html as="div" className="">
                 <div
                   className=""

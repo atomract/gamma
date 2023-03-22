@@ -1,4 +1,4 @@
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import React from "react";
 import { DoubleSide, RepeatWrapping, TextureLoader } from "three";
 import image from "../assets/c.png";
@@ -14,13 +14,13 @@ const Skybox = () => {
   //   ImageTexture.wrapT = RepeatWrapping;
 
   return (
-    <mesh position={[0, 0, 0]}>
+    <mesh>
       <OrbitControls
         enableZoom={false}
         enablePan={false}
         enableRotate={false}
       />
-      <ambientLight intensity={0} />
+      <ambientLight intensity={0.5} />
       <directionalLight position={[1, 2, 30]} intensity={1} />
       <mesh rotation={[0, 1, 0]} position={[0, -2, 0]}>
         <sphereGeometry args={[7, 105, 105]} />

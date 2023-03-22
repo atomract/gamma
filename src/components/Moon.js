@@ -12,11 +12,11 @@ const Moon = ({ size, pos }) => {
 
   return (
     <>
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.2} />
 
-      <mesh position={pos}>
-        <sphereGeometry args={[size, 50, 50]} />
-        <meshPhongMaterial specularMap={MoonTextureMap} />
+      <mesh rotation={[3, 1, 0]} position={pos}>
+        <sphereGeometry args={[size, 30, 15, 15]} />
+        <meshPhongMaterial attach={"material"} specularMap={MoonTextureMap} />
         <meshStandardMaterial
           map={MoonTextureMap}
           normalMap={MoonTextureMap}
