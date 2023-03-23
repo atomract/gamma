@@ -22,10 +22,6 @@ const Main = () => {
           style={{ objectFit: "cover", width: "100%", height: "65%" }}
         />
       </div>
-      {/* display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px; */}
       <div className="flex items-center justify-center h-16 my-8 md:my-16">
         <img src={Logo} className="logo" width={500} height={350} alt="logo" />
       </div>
@@ -42,62 +38,30 @@ const Main = () => {
         </h2>
       </div>
       {/* Stating Canvas */}
-      <div className="h-screen">
-        <div className="h-screen md:mt-5 w-full">
+      <div className="h-screen ">
+        <div className="h-screen md:mt-10 relative">
+          <div className="md:h-[80vh]  h-[30vh] -mt-8  md:-mt-16 absolute z-[100] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
+            <Canvas>
+              <Earth pos={[0, 0, 0]} size={3} url={[]} />
+              <Moon pos={[5, 0, 0]} size={0.5} />
+            </Canvas>
+          </div>
+          <div>
+            <div className="flex  justify-end  items-start ">
+              <p className=" w-64 md:w-96 font-extrabold px-5 py-3 mt-[60%]  md:mt-[32%] mr-5 md:mr-32 text-[#00000080] bg-[#9eaec0cc]   absolute z-[100]">
+                A safe, high quality and easy-to-explore virtual world twin
+                where Liveness, commnication, entertainment and investment are
+                available to everyone
+              </p>
+
+              <p className="w-auto font-extrabold px-3 py-3 mt-[105%]  mr-5 md:mr-32 md:mt-[41%]  text-white bg-[#25415ccc]   absolute z-[100]">
+                explore
+              </p>
+            </div>
+          </div>
+
           <Canvas className="">
             <Skybox />
-            <mesh>
-              <Earth pos={[0, 0.9, 0]} size={2.3} url={[]} />
-              <Moon pos={[4, 0.9, 0]} size={0.5} />
-            </mesh>
-            <mesh position={[2, -1, -0.5]}>
-              <Html as="div" className="">
-                <div>
-                  <p
-                    style={{
-                      paddingRight: "40px",
-                      paddingLeft: "20px",
-                      paddingTop: "10px",
-                      paddingBottom: "10px",
-                      background: "#9eaec0cc",
-                      width: "400px",
-                      fontWeight: "bold",
-                      color: "#00000080",
-                      wordSpacing: "3px",
-                    }}
-                  >
-                    A safe, high quality and easy-to-explore virtual world twin
-                    where Liveness, commnication, entertainment and investment
-                    are available to everyone
-                  </p>
-                </div>
-              </Html>
-            </mesh>
-            <mesh position={[9.15, -4, -4]}>
-              <Html as="div" className="">
-                <div
-                  className=""
-                  style={{ display: "flex", justifyContent: "flex-end" }}
-                >
-                  <div>
-                    <h1
-                      style={{
-                        paddingRight: "20px",
-                        paddingLeft: "20px",
-                        paddingTop: "0",
-                        paddingBottom: "5px",
-                        background: "#25415ccc",
-                        width: "100%",
-                        fontWeight: "bold",
-                        color: "white",
-                      }}
-                    >
-                      explore
-                    </h1>
-                  </div>
-                </div>
-              </Html>
-            </mesh>
           </Canvas>
         </div>
       </div>
