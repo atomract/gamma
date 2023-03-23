@@ -16,7 +16,6 @@ import EarthTexture from "../assets/textures/8k_earth_daymap.jpg";
 
 const Earth = ({ size, pos }) => {
   const [EarthTextureMap] = useLoader(TextureLoader, [EarthTexture]);
-  const materialClasses = classNames("bg-red-500", "hover:bg-blue-500");
   return (
     <mesh className="">
       <ambientLight intensity={0.6} />
@@ -25,7 +24,6 @@ const Earth = ({ size, pos }) => {
         <sphereGeometry args={[size, 50, 40]} />
         <meshPhongMaterial specularMap={EarthTextureMap} />
         <meshStandardMaterial
-          className={materialClasses}
           map={EarthTextureMap}
           normalMap={EarthTextureMap}
           side={THREE.DoubleSide}
