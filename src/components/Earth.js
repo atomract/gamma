@@ -1,4 +1,4 @@
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import "../App.css";
 import { OrbitControls } from "@react-three/drei";
 import {
@@ -12,30 +12,55 @@ import {
 import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import classNames from "classnames";
-import EarthTexture from "../assets/textures/8k_earth_daymap.jpg";
+import EarthTexture from "../assets/textures/8k_earth_daymap.png";
+import { useEffect, useRef, useState } from "react";
+import { useSpring, animated } from "@react-spring/three";
 
 const Earth = ({ size, pos }) => {
   const [EarthTextureMap] = useLoader(TextureLoader, [EarthTexture]);
-  return (
-    <mesh className="">
-      <ambientLight intensity={0.6} />
+  const materialClasses = classNames("bg-red-500", "hover:bg-blue-500");
+  const earthRef = useRef()
+  const mesh = useRef()
+  const [scrollPosition, setScrollPosition] = useState(0);
 
-      <mesh rotation={[1, 2, 1]} position={pos}>
-        <sphereGeometry args={[size, 50, 40]} />
-        <meshPhongMaterial specularMap={EarthTextureMap} />
-        <meshStandardMaterial
-          map={EarthTextureMap}
-          normalMap={EarthTextureMap}
-          side={THREE.DoubleSide}
-        />
-        <OrbitControls
-          enablePan={false}
-          autoRotate={false}
-          enableZoom={false}
-          enableRotate={false}
-        />
-      </mesh>
-    </mesh>
+  // const { springs, api } = useSpring({
+  //   X: [0, 0, 0],
+  //   config: { mass: 1, tension: 170, friction: 26 }
+  // });
+
+  const [springs, api] = useSpring(
+    () => ({  
+      X: pos,
+      config: { mass: 1, tension: 170, friction: 26 }
+      }),
+    []
+  )
+
+  useFrame(({ viewport }) => {
+    api({X: [0, -viewport.height * viewport.factor * 0.1, 0]});
+  });
+
+  useFrame(() => {
+    earthRef.current.rotation.y += 0.006
+  })
+
+  return (
+      <animated.group position={springs.X}>
+        <ambientLight intensity={0.5} />
+        <mesh ref={earthRef} position={pos}>
+          <sphereGeometry args={[size, 30, 60]} />
+          <meshPhongMaterial specularMap={EarthTextureMap} />
+          <meshStandardMaterial
+            map={EarthTextureMap}
+            normalMap={EarthTextureMap}
+          />
+          <OrbitControls
+            enablePan={false}
+            autoRotate={false}
+            enableZoom={false}
+          />
+        </mesh>
+      </animated.group>
   );
 };
 

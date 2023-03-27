@@ -1,21 +1,38 @@
-import { Canvas, useLoader } from "@react-three/fiber";
+import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import "../App.css";
 import { OrbitControls } from "@react-three/drei";
 
 import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
+// import SpacePlanet from '../assets/planet-station.fbx'
 
 import MoonTexture from "../assets/8k_moon.jpg";
+import { useRef } from "react";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Moon = ({ size, pos }) => {
   const [MoonTextureMap] = useLoader(TextureLoader, [MoonTexture]);
+  const moonRef = useRef()
+  const moonEarth = useRef()
+
+  useFrame(() => {
+    moonRef.current.rotation.y += 0.003
+    // moonEarth.current.rotation.y += 0.0016
+
+  })
+
+  // const spacePlanet = useLoader(GLTFLoader, SpacePlanet)
+
 
   return (
-    <>
-      <ambientLight intensity={0.2} />
+    <mesh 
+    // ref={moonEarth}
+    //  position={[0,0,0]}
+     >
+      <ambientLight intensity={0.001} />
 
-      <mesh rotation={[3, 1, 0]} position={pos}>
-        <sphereGeometry args={[size, 30, 15, 15]} />
+      <mesh ref={moonRef} position={pos}>
+        <sphereGeometry args={[size, 70, 80]} />
         <meshPhongMaterial attach={"material"} specularMap={MoonTextureMap} />
         <meshStandardMaterial
           map={MoonTextureMap}
@@ -37,7 +54,13 @@ const Moon = ({ size, pos }) => {
           enableRotate={false}
         />
       </mesh>
-    </>
+      {/* <mesh>
+      <primitive 
+            object = {spacePlanet.sence} />
+      </mesh>
+
+       */}
+    </mesh>
   );
 };
 
