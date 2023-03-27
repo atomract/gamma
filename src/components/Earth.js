@@ -36,8 +36,16 @@ const Earth = ({ size, pos }) => {
     []
   )
 
+  // useEffect(({viewport}) => {
+  // })
+
+
   useFrame(({ viewport }) => {
-    api({X: [0, -viewport.height * viewport.factor * 0.1, 0]});
+    console.log(viewport.height + " " + viewport.width )
+    console.log(-viewport.height * viewport.width )
+
+    api({X: [0, -viewport.height * viewport.factor * 0.001, 0]});
+    // api({X: [0, -0.3, 0]});
   });
 
   useFrame(() => {
