@@ -39,18 +39,19 @@ const Earth = ({ size, pos }) => {
   // useEffect(({viewport}) => {
   // })
 
+  useFrame(() => {
+    earthRef.current.rotation.y += 0.006;
+    setScrollPosition(window.pageYOffset);
+  })
 
   useFrame(({ viewport }) => {
     console.log(viewport.height + " " + viewport.width )
-    console.log(-viewport.height * viewport.width )
+    console.log(window.pageYOffset )
 
-    api({X: [0, -viewport.height * viewport.factor * 0.001, 0]});
+    api({X: [0, scrollPosition * 0.001, 0]});
     // api({X: [0, -0.3, 0]});
   });
 
-  useFrame(() => {
-    earthRef.current.rotation.y += 0.006
-  })
 
   return (
       <animated.group position={springs.X}>
