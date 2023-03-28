@@ -42,9 +42,9 @@ const Main = () => {
       <div className="h-[200vh] ">
         <div className="h-[200vh] md:mt-10 relative">
           <div className="md:h-[80vh]  h-[60vh] -mt-8  md:-mt-16 absolute z-[100] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
-            <Canvas >
-              <Earth pos={[0, -0.2, 0]} size={3} />
-              <Moon pos={[5, -0.2, 0]} size={0.75} />
+            <Canvas camera={{fov: 75, position: [0, 0, -16]}}>
+              <Earth pos={[0, 0.55, 0]} size={3.3} />
+              <Moon pos={[10, -0.2, 0]} size={0.75} />
             </Canvas>
           </div>
           <Button/>

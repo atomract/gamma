@@ -17,7 +17,7 @@ const Moon = ({ size, pos }) => {
 
   useFrame(() => {
     moonRef.current.rotation.y += 0.003
-    // moonEarth.current.rotation.y += 0.0016
+    moonEarth.current.rotation.y += 0.015
 
   })
 
@@ -26,8 +26,8 @@ const Moon = ({ size, pos }) => {
 
   return (
     <mesh 
-    // ref={moonEarth}
-    //  position={[0,0,0]}
+     ref={moonEarth}
+      position={[0, 0.55, 0]}
      >
       <ambientLight intensity={0.001} />
 
