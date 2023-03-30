@@ -6,29 +6,26 @@ import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 // import SpacePlanet from '../assets/planet-station.fbx'
 
+import unknownObject from "../assets/142517171_xl_normal_none-50.gltf";
+
 import MoonTexture from "../assets/8k_moon.jpg";
 import { useRef } from "react";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 const Moon = ({ size, pos }) => {
   const [MoonTextureMap] = useLoader(TextureLoader, [MoonTexture]);
-  const moonRef = useRef()
-  const moonEarth = useRef()
+  const moonRef = useRef();
+  const moonEarth = useRef();
 
   useFrame(() => {
-    moonRef.current.rotation.y += 0.003
-    moonEarth.current.rotation.y += 0.015
+    moonRef.current.rotation.y += 0.003;
+    moonEarth.current.rotation.y += 0.015;
+  });
 
-  })
-
-  // const spacePlanet = useLoader(GLTFLoader, SpacePlanet)
-
+  const spacePlanet = useLoader(GLTFLoader, unknownObject);
 
   return (
-    <mesh 
-     ref={moonEarth}
-      position={[0, 0.55, 0]}
-     >
+    <mesh ref={moonEarth} position={[0, 0.55, 0]}>
       <ambientLight intensity={0.001} />
 
       <mesh ref={moonRef} position={pos}>
@@ -60,6 +57,9 @@ const Moon = ({ size, pos }) => {
       </mesh>
 
        */}
+      <mesh>
+        <primitive scale={1} object={spacePlanet.scene} />
+      </mesh>
     </mesh>
   );
 };
