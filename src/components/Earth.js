@@ -31,8 +31,10 @@ const Earth = ({ size, pos }) => {
   const [springs, api] = useSpring(
     () => ({  
       X: pos,
+      scale: 2.58,
       radii: [size, 24, 48],
-      config: { mass: 1, tension: 170, friction: 26 }
+      config: { mass: 1, tension: 170, friction: 26 },
+      reset: true
       }),
     []
   )
@@ -49,12 +51,17 @@ const Earth = ({ size, pos }) => {
     console.log(viewport.height + " " + viewport.width )
     console.log(window.pageYOffset )
 
-    // if(scrollPosition > 100 ){
+    // if(scrollPosition  100 ){
     //   api({
     //   X: [0, scrollPosition * 0.1, 0],
     // });
     // }
     // else {
+      if(window.pageYOffset > 450 ) {
+        api({
+          scale: 1.25,
+        });
+      }
       api({
         X: [0, -scrollPosition * 0.01, 0],
       });
@@ -63,7 +70,7 @@ const Earth = ({ size, pos }) => {
 
 
   return (
-      <animated.group position={springs.X}>
+    <animated.group position={springs.X} scale={springs.scale}>
         <ambientLight intensity={0.5} />
         <mesh ref={earthRef} position={pos}>
           <sphereGeometry args={[size, 33, 66]} />

@@ -14,7 +14,7 @@ export const Button = () => {
 
         <div className="flex   justify-start  items-start">
           <div className="mt-[105%]  ml-60 md:mr-70 md:mt-[60%] absolute z-[100] ">
-            <h1 className="text-white text-5xl">About US</h1>
+            <h1 className="text-white mt-[90%] text-5xl">About US</h1>
           </div>
         </div>
       </div>

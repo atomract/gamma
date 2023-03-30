@@ -20,7 +20,8 @@ const Main = () => {
           top: 0,
           left: 0,
           zIndex: -1,
-          opacity: 0.86,
+          backgroundColor: '#4169e1',
+          opacity: 0.96,
         }}
       >
         <div className="overlay" />
