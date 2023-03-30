@@ -15,22 +15,24 @@ const Main = () => {
   return (
     <>
       <div
+        className="w-full  "
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           zIndex: -1,
-          backgroundColor: '#4169e1',
+          backgroundColor: "#4169e1",
           opacity: 0.96,
         }}
       >
-        <div className="overlay" />
+        <div className="overlay w-full" />
         <video
           ref={videoRef}
           src={BGVideo}
           autoPlay
           muted
           loop
+          className="w-full"
           style={{ objectFit: "cover", width: "100%", height: "45%" }}
         />
       </div>
@@ -49,8 +51,8 @@ const Main = () => {
         </h2>
       </div>
       {/* Stating Canvas */}
-      <div className="h-[200vh] ">
-        <div className="h-[200vh] md:mt-10 relative">
+      <div className="h-[200vh]    ">
+        <div className="h-[200vh] edge   md:mt-10 relative">
           <div className="md:h-[100vh]  h-[60vh] -mt-8  md:-mt-16 absolute z-[100] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
             <Canvas camera={{ fov: 75, position: [0, 0, -16] }}>
               <Earth pos={[0, 0.55, 0]} size={3.3} />
