@@ -57,9 +57,9 @@ const Moon = ({ size, pos }) => {
       </mesh>
 
        */}
-      <mesh>
+      {/* <mesh>
         <primitive scale={1} object={spacePlanet.scene} />
-      </mesh>
+      </mesh> */}
     </mesh>
   );
 };

@@ -1,26 +1,24 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import "../App.css";
 import { OrbitControls } from "@react-three/drei";
-import {
-  Texture,
-  MeshBasicMaterial,
-  SphereGeometry,
-  RepeatWrapping,
-  // TextureLoader,
-} from "three";
 
-import * as THREE from "three";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import classNames from "classnames";
-import EarthTexture from "../assets/textures/8k_earth_daymap.png";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/three";
 
+import EarthDayMap from "../assets/textures/8k_earth_daymap.png";
+import EarthNormalMap from "../assets/textures/8k_earth_normal_map.jpg";
+import EarthSpecularMap from "../assets/textures/8k_earth_specular_map.jpg";
+import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
+import { DoubleSide } from "three";
+
 const Earth = ({ size, pos }) => {
-  const [EarthTextureMap] = useLoader(TextureLoader, [EarthTexture]);
-  const materialClasses = classNames("bg-red-500", "hover:bg-blue-500");
-  const earthRef = useRef()
-  const mesh = useRef()
+  const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
+    TextureLoader,
+    [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
+  );
+  const earthRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
 
   // const { springs, api } = useSpring({
@@ -29,15 +27,15 @@ const Earth = ({ size, pos }) => {
   // });
 
   const [springs, api] = useSpring(
-    () => ({  
+    () => ({
       X: pos,
       scale: 2.58,
       radii: [size, 24, 48],
       config: { mass: 1, tension: 170, friction: 26 },
-      reset: true
-      }),
+      reset: true,
+    }),
     []
-  )
+  );
 
   // useEffect(({viewport}) => {
   // })
@@ -45,11 +43,11 @@ const Earth = ({ size, pos }) => {
   useFrame(() => {
     earthRef.current.rotation.y += 0.006;
     setScrollPosition(window.pageYOffset);
-  })
+  });
 
   useFrame(({ viewport }) => {
-    console.log(viewport.height + " " + viewport.width )
-    console.log(window.pageYOffset )
+    console.log(viewport.height + " " + viewport.width);
+    console.log(window.pageYOffset);
 
     // if(scrollPosition  100 ){
     //   api({
@@ -57,27 +55,30 @@ const Earth = ({ size, pos }) => {
     // });
     // }
     // else {
-      if(window.pageYOffset > 450 ) {
-        api({
-          scale: 1.25,
-        });
-      }
+    if (window.pageYOffset > 450) {
       api({
-        X: [0, -scrollPosition * 0.01, 0],
+        scale: 1.25,
       });
+    }
+    api({
+      X: [0, -scrollPosition * 0.01, 0],
+    });
     // }
-  },[]);
-
+  }, []);
 
   return (
     <animated.group position={springs.X} scale={springs.scale}>
-        <ambientLight intensity={0.5} />
-        <mesh ref={earthRef} position={pos}>
-          <sphereGeometry args={[size, 33, 66]} />
-          <meshPhongMaterial specularMap={EarthTextureMap} />
+      <ambientLight intensity={1} />
+      <mesh>
+        <mesh position={pos}>
+          <sphereGeometry args={[size + 0.02, 33, 66]} />
+
           <meshStandardMaterial
-            map={EarthTextureMap}
-            normalMap={EarthTextureMap}
+            map={cloudsMap}
+            opacity={0.4}
+            depthWrite={true}
+            transparent={true}
+            side={DoubleSide}
           />
           <OrbitControls
             enablePan={false}
@@ -85,7 +86,18 @@ const Earth = ({ size, pos }) => {
             enableZoom={false}
           />
         </mesh>
-      </animated.group>
+        <mesh ref={earthRef} position={pos}>
+          <sphereGeometry args={[size, 33, 66]} />
+          <meshPhongMaterial specularMap={specularMap} />
+          <meshStandardMaterial map={colorMap} normalMap={normalMap} />
+          <OrbitControls
+            enablePan={false}
+            autoRotate={false}
+            enableZoom={false}
+          />
+        </mesh>
+      </mesh>
+    </animated.group>
   );
 };
 
