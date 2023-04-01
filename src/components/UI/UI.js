@@ -1,13 +1,10 @@
-export const Button = () => {
-  const OnHandleBtn = () => {
-    alert("clicked");
-  };
+export const Button = ({handleBtn}) => {
 
   return (
     <div>
       <div className="flex  justify-end  items-start ">
         <div className="mt-[105%]  mr-5 md:mr-80 md:mt-[35%] absolute z-[100] ">
-          <button onClick={OnHandleBtn} className="exploreBtnParent">
+          <button onClick={handleBtn} className="exploreBtnParent">
             <p className=" exploreBtn w-auto  font-extrabold  text-white bg-[#25415ccc]   ">
               explore
             </p>

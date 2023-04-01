@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import Earth from "./Earth";
@@ -11,7 +11,14 @@ import Navbar from "./navbar";
 import { Button } from "./UI/UI";
 
 const Main = () => {
+
   const videoRef = useRef();
+  const [zoomAnim, setZoomAnim] = useState(false)
+
+  const OnHandleBtn = () => {
+    setZoomAnim(true)
+  };
+
   return (
     <>
       <div
@@ -55,11 +62,11 @@ const Main = () => {
         <div className="h-[200vh] edge2    relative">
           <div className="md:h-[100vh]  h-[60vh] -mt-8  md:-mt-16 absolute z-[100] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
             <Canvas camera={{ fov: 75, position: [0, 0, -16] }}>
-              <Earth pos={[0, 0.55, 0]} size={3.3} />
+              <Earth pos={[0, 0.55, 0]} size={3.3} zoomState={zoomAnim}/>
               <Moon pos={[10, -0.2, 0]} size={0.75} />
             </Canvas>
           </div>
-          <Button />
+          <Button handleBtn={OnHandleBtn}/>
           <Canvas>
             <Skybox />
             {/* <Skybox /> */}

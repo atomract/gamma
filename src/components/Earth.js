@@ -4,7 +4,7 @@ import { OrbitControls } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import classNames from "classnames";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSpring, animated } from "@react-spring/three";
 
 import EarthDayMap from "../assets/textures/8k_earth_daymap.png";
@@ -12,19 +12,18 @@ import EarthNormalMap from "../assets/textures/8k_earth_normal_map.jpg";
 import EarthSpecularMap from "../assets/textures/8k_earth_specular_map.jpg";
 import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
 import { DoubleSide } from "three";
+import * as THREE from 'three';
 
-const Earth = ({ size, pos }) => {
+const Earth = ({ size, pos, zoomState }) => {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
     TextureLoader,
     [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
   );
   const earthRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [zoomAnim, setZoomAnim] = useState(false);
+  const vec = new THREE.Vector3()
 
-  // const { springs, api } = useSpring({
-  //   X: [0, 0, 0],
-  //   config: { mass: 1, tension: 170, friction: 26 }
-  // });
 
   const [springs, api] = useSpring(
     () => ({
@@ -37,8 +36,9 @@ const Earth = ({ size, pos }) => {
     []
   );
 
-  // useEffect(({viewport}) => {
-  // })
+  useEffect(() => {
+    setZoomAnim(zoomState)
+  },[zoomState])
 
   useFrame(() => {
     earthRef.current.rotation.y += 0.006;
@@ -49,22 +49,30 @@ const Earth = ({ size, pos }) => {
     console.log(viewport.height + " " + viewport.width);
     console.log(window.pageYOffset);
 
-    // if(scrollPosition  100 ){
-    //   api({
-    //   X: [0, scrollPosition * 0.1, 0],
-    // });
-    // }
-    // else {
-    if (window.pageYOffset > 450) {
+    if (window.pageYOffset > 450 && !zoomAnim) {
       api({
         scale: 1.25,
       });
     }
-    api({
-      X: [0, -scrollPosition * 0.01, 0],
-    });
+    if (!zoomAnim) {
+      api({
+        X: [0, -scrollPosition * 0.01, 0],
+      });
+    }
+    
     // }
   }, []);
+
+  useFrame(state => {
+    if(zoomAnim) {
+      state.camera.lookAt(earthRef.current.position)
+      state.camera.position.lerp(vec.set(0, 0, 0), 0.05)
+      state.camera.updateProjectionMatrix()
+      setTimeout(() => {
+      setZoomAnim(false)
+      }, 1500);
+    }
+  })
 
   return (
     <animated.group position={springs.X} scale={springs.scale}>
