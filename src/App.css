@@ -50,21 +50,29 @@ body,
   background-color: rgba(0, 0, 255, 0.3);
 }
 
-.edge {
+.edge1 {
   /* border-width: 0px 0px 100px 0px;
   border-style: solid;
   border-color: linear-gradient(180deg, red, yellow); */
   /* border-top: 100px solid  */
   /* border-top: 10px solid linear-gradient(to down, red, yellow); */
   /* border-style: solid;
-  border-width: 0px 0px 20px 0px; */
-  /* border-top: 10px solid #00436f; */
-  /* border-image: linear-gradient(180deg, #00436f, #030e18) 1 0 0/100% 1 0 repeat; */
+  border-width: 0px 0px 20px 0px; 
+  border-top: 10px solid #00436f; 
+  border-image: linear-gradient(180deg, #00436f, #030e18) 1 0 0/100% 1 0 repeat;
   /* filter: blur(3px); */
   /* margin-bottom: 10px; */
-  border-top: solid 1.5em rgba(white, 0.2);
-  /* position: absolute;
-  border: 1px solid white; */
+  /* border-top: solid 1.5em rgba(white, 0.2); */
+  /* position: absolute; */
+  border-width: 40px 0px 0px 0px;
+
+  border-image: linear-gradient(to right, #00436f, #008ab6) 1;
+}
+
+.edge2 {
+  border-width: 40px 0px 0px 0px;
+
+  border-image: linear-gradient(to right, #00436f, #008ab6) 2;
 }
 
 @media screen and (min-width: 768px) {
