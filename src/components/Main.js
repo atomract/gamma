@@ -46,13 +46,13 @@ const Main = () => {
         </h1>
 
         {/* Hero SubText */}
-        <h2 className="text-center font-medium text-white md:text-9xl  ">
+        <h2 className="text-center  font-medium text-white md:text-9xl  ">
           MetaVerse
         </h2>
       </div>
       {/* Stating Canvas */}
-      <div className="h-[200vh]    ">
-        <div className="h-[200vh] edge   md:mt-10 relative">
+      <div className="h-[200vh]  edge1  ">
+        <div className="h-[200vh] edge2    relative">
           <div className="md:h-[100vh]  h-[60vh] -mt-8  md:-mt-16 absolute z-[100] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
             <Canvas camera={{ fov: 75, position: [0, 0, -16] }}>
               <Earth pos={[0, 0.55, 0]} size={3.3} />
