@@ -60,20 +60,24 @@ body,
   border-width: 0px 0px 20px 0px; 
   border-top: 10px solid #00436f; 
   border-image: linear-gradient(180deg, #00436f, #030e18) 1 0 0/100% 1 0 repeat;
-  /* filter: blur(3px); */
+  filter: blur(3px);
   /* margin-bottom: 10px; */
   /* border-top: solid 1.5em rgba(white, 0.2); */
   /* position: absolute; */
-  border-width: 40px 0px 0px 0px;
-
-  border-image: linear-gradient(to right, #00436f, #008ab6) 1;
+  /* backdrop-filter: blur(15px); */
+  filter: blur(4px);
+  height: 50px;
+  margin-top: -14px;
+  opacity: 0.9;
+  background-image: linear-gradient(to bottom, #030e18, #00436f);
+  width: 100%;
 }
 
-.edge2 {
+/* .edge2 {
   border-width: 40px 0px 0px 0px;
 
   border-image: linear-gradient(to right, #00436f, #008ab6) 2;
-}
+} */
 
 @media screen and (min-width: 768px) {
   nav {
