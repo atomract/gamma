@@ -12,7 +12,7 @@ import EarthNormalMap from "../assets/textures/8k_earth_normal_map.jpg";
 import EarthSpecularMap from "../assets/textures/8k_earth_specular_map.jpg";
 import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
 import { DoubleSide } from "three";
-import * as THREE from 'three';
+import * as THREE from "three";
 
 const Earth = ({ size, pos, zoomState }) => {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
@@ -22,8 +22,7 @@ const Earth = ({ size, pos, zoomState }) => {
   const earthRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [zoomAnim, setZoomAnim] = useState(false);
-  const vec = new THREE.Vector3()
-
+  const vec = new THREE.Vector3();
 
   const [springs, api] = useSpring(
     () => ({
@@ -37,8 +36,8 @@ const Earth = ({ size, pos, zoomState }) => {
   );
 
   useEffect(() => {
-    setZoomAnim(zoomState)
-  },[zoomState])
+    setZoomAnim(zoomState);
+  }, [zoomState]);
 
   useFrame(() => {
     earthRef.current.rotation.y += 0.006;
@@ -59,51 +58,33 @@ const Earth = ({ size, pos, zoomState }) => {
         X: [0, -scrollPosition * 0.01, 0],
       });
     }
-    
+
     // }
   }, []);
 
-  useFrame(state => {
-    if(zoomAnim) {
-      state.camera.lookAt(earthRef.current.position)
-      state.camera.position.lerp(vec.set(0, 0, 0), 0.05)
-      state.camera.updateProjectionMatrix()
+  useFrame((state) => {
+    if (zoomAnim) {
+      state.camera.lookAt(earthRef.current.position);
+      state.camera.position.lerp(vec.set(0, 0, 0), 0.05);
+      state.camera.updateProjectionMatrix();
       setTimeout(() => {
-      setZoomAnim(false)
+        setZoomAnim(false);
       }, 1500);
     }
-  })
+  });
 
   return (
     <animated.group position={springs.X} scale={springs.scale}>
       <ambientLight intensity={1} />
-      <mesh>
-        <mesh position={pos}>
-          <sphereGeometry args={[size + 0.02, 33, 66]} />
-
-          <meshStandardMaterial
-            map={cloudsMap}
-            opacity={0.4}
-            depthWrite={true}
-            transparent={true}
-            side={DoubleSide}
-          />
-          <OrbitControls
-            enablePan={false}
-            autoRotate={false}
-            enableZoom={false}
-          />
-        </mesh>
-        <mesh ref={earthRef} position={pos}>
-          <sphereGeometry args={[size, 33, 66]} />
-          <meshPhongMaterial specularMap={specularMap} />
-          <meshStandardMaterial map={colorMap} normalMap={normalMap} />
-          <OrbitControls
-            enablePan={false}
-            autoRotate={false}
-            enableZoom={false}
-          />
-        </mesh>
+      <mesh ref={earthRef} position={pos}>
+        <sphereGeometry args={[size, 33, 66]} />
+        <meshPhongMaterial specularMap={specularMap} />
+        <meshStandardMaterial map={colorMap} normalMap={normalMap} />
+        <OrbitControls
+          enablePan={false}
+          autoRotate={false}
+          enableZoom={false}
+        />
       </mesh>
     </animated.group>
   );
