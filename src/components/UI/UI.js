@@ -1,5 +1,4 @@
-export const Button = ({handleBtn}) => {
-
+export const Button = ({ handleBtn }) => {
   return (
     <div>
       <div className="flex  justify-end  items-start ">
