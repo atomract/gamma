@@ -1,6 +1,6 @@
 import { Canvas, useFrame, useLoader } from "@react-three/fiber";
 import "../App.css";
-import { OrbitControls } from "@react-three/drei";
+import { useHelper, OrbitControls } from "@react-three/drei";
 
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 import classNames from "classnames";
@@ -19,6 +19,8 @@ const Earth = (props) => {
     TextureLoader,
     [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
   );
+  const directionalLightRef = useRef();
+  // useHelper(directionalLightRef, THREE.DirectionalLightHelper, 1);
   const earthRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [zoomAnim, setZoomAnim] = useState();
@@ -38,14 +40,14 @@ const Earth = (props) => {
 
   useEffect(() => {
     setZoomAnim(props.zoomState);
-
   }, [props.zoomState, zoomAnim]);
 
   useEffect(() => {
     window.pageYOffset < 450 ? setScaleState(false) : setScaleState(true);
-    if(!zoomAnim) {setScaleState(false)}
-  },[window.pageYOffset, setScaleState, zoomAnim])
-
+    if (!zoomAnim) {
+      setScaleState(false);
+    }
+  }, [window.pageYOffset, setScaleState, zoomAnim]);
 
   useFrame(({ viewport }) => {
     earthRef.current.rotation.y += 0.006;
@@ -69,8 +71,8 @@ const Earth = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(zoomAnim)
-  }, [zoomAnim])
+    console.log(zoomAnim);
+  }, [zoomAnim]);
 
   useFrame((state) => {
     if (zoomAnim) {
@@ -87,9 +89,18 @@ const Earth = (props) => {
   });
 
   return (
-    <animated.group position={zoomAnim ? props.pos : springs.X} scale={scaleState ? springs.scale : 2}>
+    <animated.group
+      position={zoomAnim ? props.pos : springs.X}
+      scale={scaleState ? springs.scale : 2}
+    >
       <ambientLight intensity={1} />
-      <mesh ref={earthRef} position={props.pos}>
+      <directionalLight
+        position={[2, 8, 3]}
+        intensity={1.5}
+        ref={directionalLightRef}
+        castShadow
+      />
+      <mesh castShadow ref={earthRef} position={props.pos}>
         <sphereGeometry args={[props.size, 33, 66]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial map={colorMap} normalMap={normalMap} />
