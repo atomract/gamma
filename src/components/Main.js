@@ -9,6 +9,8 @@ import Moon from "./Moon";
 import Skybox from "./Skybox";
 import Navbar from "./navbar";
 import { Button } from "./UI/UI";
+import { Perf } from "r3f-perf";
+import FrontPageText from "./FrontPageText";
 
 const Main = () => {
   const videoRef = useRef();
@@ -44,18 +46,7 @@ const Main = () => {
       </div>
       <Navbar />
 
-      <div style={{}} className="mt-6">
-        {/* Hero Main Text */}
-        <h1 className=" text-center  text-5xl md:text-5xl font-black text-white ">
-          {" "}
-          ULTIMATE LIFE{" "}
-        </h1>
-
-        {/* Hero SubText */}
-        <h2 className="text-center pb-6  font-medium text-white md:text-9xl  ">
-          MetaVerse
-        </h2>
-      </div>
+      <FrontPageText />
       {/* Stating Canvas */}
       <div className="h-[200vh]    ">
         <div className="edge1 z-[2] absolute"></div>
@@ -65,6 +56,7 @@ const Main = () => {
               camera={{ fov: 75, position: [0, 0, -16] }}
               className=" z-[3]"
             >
+              <Perf />
               <Earth pos={[0, 0.55, 0]} size={3.3} zoomState={zoomAnim} />
               <Moon pos={[10, -0.2, 0]} size={0.75} />
             </Canvas>
