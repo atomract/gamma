@@ -20,6 +20,10 @@ const Main = () => {
     setZoomAnim(true);
   };
 
+  const OnHandleBack = () => {
+    setZoomAnim(false);
+  };
+
   return (
     <>
       <div
@@ -41,7 +45,7 @@ const Main = () => {
           muted
           loop
           className="w-full"
-          style={{ objectFit: "cover", width: "100%", height: "25%" }}
+          style={{ objectFit: "cover", width: "100%", height: "42%" }}
         />
       </div>
       <Navbar />
@@ -56,7 +60,6 @@ const Main = () => {
               camera={{ fov: 75, position: [0, 0, -16] }}
               className=" z-[3]"
             >
-              <Perf />
               <Earth pos={[0, 0.55, 0]} size={3.3} zoomState={zoomAnim} />
               <Moon pos={[10, -0.2, 0]} size={0.75} />
             </Canvas>
