@@ -14,21 +14,22 @@ import EarthCloudsMap from "../assets/textures/8k_earth_clouds.jpg";
 import { DoubleSide } from "three";
 import * as THREE from "three";
 
-const Earth = ({ size, pos, zoomState }) => {
+const Earth = (props) => {
   const [colorMap, normalMap, specularMap, cloudsMap] = useLoader(
     TextureLoader,
     [EarthDayMap, EarthNormalMap, EarthSpecularMap, EarthCloudsMap]
   );
   const earthRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [zoomAnim, setZoomAnim] = useState(false);
+  const [zoomAnim, setZoomAnim] = useState();
+  const [scaleState, setScaleState] = useState();
   const vec = new THREE.Vector3();
 
   const [springs, api] = useSpring(
     () => ({
-      X: pos,
-      scale: 2.58,
-      radii: [size, 24, 48],
+      X: props.pos,
+      scale: 3.5,
+      radii: [props.size, 24, 48],
       config: { mass: 1, tension: 170, friction: 26 },
       reset: true,
     }),
@@ -36,36 +37,48 @@ const Earth = ({ size, pos, zoomState }) => {
   );
 
   useEffect(() => {
-    setZoomAnim(zoomState);
-  }, [zoomState]);
+    setZoomAnim(props.zoomState);
 
-  useFrame(() => {
-    earthRef.current.rotation.y += 0.006;
-    setScrollPosition(window.pageYOffset);
-  });
+  }, [props.zoomState, zoomAnim]);
+
+  useEffect(() => {
+    window.pageYOffset < 450 ? setScaleState(false) : setScaleState(true);
+    if(!zoomAnim) {setScaleState(false)}
+  },[window.pageYOffset, setScaleState, zoomAnim])
+
 
   useFrame(({ viewport }) => {
-    console.log(viewport.height + " " + viewport.width);
+    earthRef.current.rotation.y += 0.006;
+    setScrollPosition(window.pageYOffset);
+
+    // console.log(viewport.height + " " + viewport.width);
     console.log(window.pageYOffset);
 
-    if (window.pageYOffset > 450 && !zoomAnim) {
-      api({
-        scale: 1.25,
-      });
-    }
     if (!zoomAnim) {
       api({
-        X: [0, -scrollPosition * 0.01, 0],
+        X: [0, -scrollPosition * 0.05, 0],
+      });
+    }
+    if (!scaleState && !zoomAnim) {
+      api({
+        scale: 2,
       });
     }
 
     // }
   }, []);
 
+  useEffect(() => {
+    console.log(zoomAnim)
+  }, [zoomAnim])
+
   useFrame((state) => {
     if (zoomAnim) {
+      // api({
+      //   X: props.pos,
+      // });
       state.camera.lookAt(earthRef.current.position);
-      state.camera.position.lerp(vec.set(0, 0, 0), 0.05);
+      state.camera.position.lerp(vec.set(0, 0, -10), 0.075);
       state.camera.updateProjectionMatrix();
       setTimeout(() => {
         setZoomAnim(false);
@@ -74,10 +87,10 @@ const Earth = ({ size, pos, zoomState }) => {
   });
 
   return (
-    <animated.group position={springs.X} scale={springs.scale}>
+    <animated.group position={zoomAnim ? props.pos : springs.X} scale={scaleState ? springs.scale : 2}>
       <ambientLight intensity={1} />
-      <mesh ref={earthRef} position={pos}>
-        <sphereGeometry args={[size, 33, 66]} />
+      <mesh ref={earthRef} position={props.pos}>
+        <sphereGeometry args={[props.size, 33, 66]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial map={colorMap} normalMap={normalMap} />
         <OrbitControls

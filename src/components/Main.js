@@ -18,6 +18,10 @@ const Main = () => {
     setZoomAnim(true);
   };
 
+  const OnHandleBack = () => {
+    setZoomAnim(false);
+  };
+
   return (
     <>
       <div
@@ -39,7 +43,7 @@ const Main = () => {
           muted
           loop
           className="w-full"
-          style={{ objectFit: "cover", width: "100%", height: "25%" }}
+          style={{ objectFit: "cover", width: "100%", height: "42%" }}
         />
       </div>
       <Navbar />
@@ -57,16 +61,19 @@ const Main = () => {
         </h2>
       </div>
       {/* Stating Canvas */}
-      <div className="h-[200vh]    ">
-        <div className="edge1 z-[2] absolute"></div>
-        <div className="h-[200vh] edge2  relative">
-          <div className="md:h-[100vh]  h-[60vh] -mt-8 md:-mt-16 absolute z-[5] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
-            <Canvas
-              camera={{ fov: 75, position: [0, 0, -16] }}
-              className=" z-[3]"
-            >
-              <Earth pos={[0, 0.55, 0]} size={3.3} zoomState={zoomAnim} />
-              <Moon pos={[10, -0.2, 0]} size={0.75} />
+      <div className="h-[200vh] ">
+      <div className="edge1 z-[2] absolute"></div>
+        <div className="h-[200vh]  edge2 relative">
+       
+          <div className="md:h-[200vh]  h-[60vh] -mt-8  md:-mt-16 absolute z-[100] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
+          {zoomAnim &&  (<>          <button onClick={OnHandleBack} className="exploreBtnParent">
+            <h1 className=" exploreBtn w-auto  font-extrabold  text-white bg-[#25415ccc]   ">
+              {'<-'}
+            </h1>
+          </button></>)}
+            <Canvas camera={{ fov: 75, position: [0, 0, -90] }}>
+              <Earth pos={[0, 0.6, 0]} size={3.2} zoomState={zoomAnim}/>
+              <Moon pos={[10, 1.5, 0]} size={1} />
             </Canvas>
           </div>
           <Button handleBtn={OnHandleBtn} />
