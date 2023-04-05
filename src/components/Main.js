@@ -57,6 +57,7 @@ const Main = () => {
         <div className="h-[200vh] edge2  relative">
           <div className="md:h-[100vh]  h-[60vh] -mt-8 md:-mt-16 absolute z-[5] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
             <Canvas
+              shadows
               camera={{ fov: 75, position: [0, 0, -16] }}
               className=" z-[3]"
             >
