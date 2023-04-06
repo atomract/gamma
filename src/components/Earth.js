@@ -24,13 +24,13 @@ const Earth = (props) => {
   const earthRef = useRef();
   const [scrollPosition, setScrollPosition] = useState(0);
   const [zoomAnim, setZoomAnim] = useState();
-  const [scaleState, setScaleState] = useState();
+  const [scaleState, setScaleState] = useState(true);
   const vec = new THREE.Vector3();
 
   const [springs, api] = useSpring(
     () => ({
       X: props.pos,
-      scale: 3.5,
+      scale: !zoomAnim ? 10.5 : 3.5,
       radii: [props.size, 24, 48],
       config: { mass: 1, tension: 170, friction: 26 },
       reset: true,
@@ -43,27 +43,23 @@ const Earth = (props) => {
   }, [props.zoomState, zoomAnim]);
 
   useEffect(() => {
-    window.pageYOffset < 450 ? setScaleState(false) : setScaleState(true);
-    if (!zoomAnim) {
-      setScaleState(false);
-    }
+    window.pageYOffset > 450 ? setScaleState(false) : setScaleState(true);
   }, [window.pageYOffset, setScaleState, zoomAnim]);
 
   useFrame(({ viewport }) => {
-    earthRef.current.rotation.y += 0.006;
+    earthRef.current.rotation.y += 0.003;
     setScrollPosition(window.pageYOffset);
 
     // console.log(viewport.height + " " + viewport.width);
-    console.log(window.pageYOffset);
 
-    if (!zoomAnim) {
+    if (!zoomAnim && !scaleState) {
       api({
-        X: [0, -scrollPosition * 0.05, 0],
+        X: [0, -scrollPosition * 0.02, 0],
       });
     }
-    if (!scaleState && !zoomAnim) {
+    if (!scaleState) {
       api({
-        scale: 2,
+        scale: 3,
       });
     }
 
@@ -80,7 +76,15 @@ const Earth = (props) => {
       //   X: props.pos,
       // });
       state.camera.lookAt(earthRef.current.position);
-      state.camera.position.lerp(vec.set(0, 0, -10), 0.075);
+      state.camera.position.lerp(vec.set(0, 0, -30), 0.075);
+      state.camera.updateProjectionMatrix();
+      setTimeout(() => {
+        setZoomAnim(false);
+      }, 1500);
+    }
+    else if(!zoomAnim) {
+      state.camera.lookAt(earthRef.current.position);
+      state.camera.position.lerp(vec.set(0, 0, -90), 0.075);
       state.camera.updateProjectionMatrix();
       setTimeout(() => {
         setZoomAnim(false);
@@ -91,7 +95,7 @@ const Earth = (props) => {
   return (
     <animated.group
       position={zoomAnim ? props.pos : springs.X}
-      scale={scaleState ? springs.scale : 2}
+      scale={springs.scale}
     >
       <ambientLight intensity={1} />
       <mesh castShadow ref={earthRef} position={props.pos}>

@@ -2,14 +2,12 @@ import React, { useRef, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import { Html, OrbitControls } from "@react-three/drei";
 import Earth from "./Earth";
-import Logo from "../assets/logo.png";
 
 import BGVideo from "../assets/video.mp4";
 import Moon from "./Moon";
 import Skybox from "./Skybox";
 import Navbar from "./navbar";
 import { Button } from "./UI/UI";
-import { Perf } from "r3f-perf";
 import FrontPageText from "./FrontPageText";
 
 const Main = () => {
@@ -49,20 +47,28 @@ const Main = () => {
         />
       </div>
       <Navbar />
-
+      <div className=" w-full h-[25vh]">
+      <Canvas className="">
       <FrontPageText />
+      </Canvas>
+    </div>
       {/* Stating Canvas */}
       <div className="h-[200vh]    ">
         <div className="edge1 z-[2] absolute"></div>
         <div className="h-[200vh] edge2  relative">
-          <div className="md:h-[100vh]  h-[60vh] -mt-8 md:-mt-16 absolute z-[5] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
+          <div className="md:h-[200vh]  h-[60vh] -mt-8 md:-mt-16 absolute z-[5] mx-auto w-[100%]  md:w-[100%] top-0 left-0">
+          {zoomAnim &&  (<>          <button onClick={OnHandleBack} className="exploreBtnParent">
+            <h1 className=" exploreBtn w-auto  font-extrabold  text-white bg-[#25415ccc]   ">
+              {'<-'}
+            </h1>
+          </button></>)}
             <Canvas
               shadows
-              camera={{ fov: 75, position: [0, 0, -16] }}
-              className=" z-[3]"
+              camera={{ fov: 75, position: [0, 0, -90] }}
+              // className=" z-[3]"
             >
               <Earth pos={[0, 0.55, 0]} size={3.3} zoomState={zoomAnim} />
-              <Moon pos={[10, -0.2, 0]} size={0.75} />
+              <Moon pos={[14, -0.2, 0]} size={0.75} />
             </Canvas>
           </div>
           <Button handleBtn={OnHandleBtn} />

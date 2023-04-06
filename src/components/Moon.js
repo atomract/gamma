@@ -18,8 +18,8 @@ const Moon = ({ size, pos }) => {
   const moonEarth = useRef();
 
   useFrame(() => {
-    moonRef.current.rotation.y += 0.003;
-    moonEarth.current.rotation.y += 0.015;
+    moonRef.current.rotation.y += 0.0045;
+    moonEarth.current.rotation.y += 0.005;
   });
 
   const spacePlanet = useLoader(GLTFLoader, unknownObject);
