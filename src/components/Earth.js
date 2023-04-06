@@ -94,13 +94,13 @@ const Earth = (props) => {
       scale={scaleState ? springs.scale : 2}
     >
       <ambientLight intensity={1} />
-      <directionalLight
-        position={[2, 8, 3]}
-        intensity={1.5}
-        ref={directionalLightRef}
-        castShadow
-      />
       <mesh castShadow ref={earthRef} position={props.pos}>
+        <directionalLight
+          position={[-15, 6, 1]}
+          intensity={-1}
+          ref={directionalLightRef}
+          castShadow
+        />
         <sphereGeometry args={[props.size, 33, 66]} />
         <meshPhongMaterial specularMap={specularMap} />
         <meshStandardMaterial map={colorMap} normalMap={normalMap} />
